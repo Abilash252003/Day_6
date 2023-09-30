@@ -1,0 +1,51 @@
+///100 days of RTL challenge///
+
+///Abilash P///
+
+///Carry look ahead adder///
+
+module CLA_tb();
+
+reg  [3:0]a,b;
+reg  cin;
+wire [3:0]s,c;
+
+CLA DUT(.a(a), .b(b), .cin(cin), .s(s), .c(c));
+
+integer i;
+
+initial 
+begin
+  a = 4'b0000;
+  b = 4'b0000;
+  cin = 0;
+end
+
+
+initial
+begin
+  $display ("A is constant(0000) and B varies from 0000 to 1111");
+  for(i=4'b0000; i<=4'b1111; i=i+1)
+  begin
+       {a, b} = i;
+       #20;
+       $display ("Input A = %b----Input B = %b----Input C = %b----Output Sum = %b----Output Carry = %b",a,b,cin,s,c);
+  end
+  $display ("B is constant(0000) and A varies from 0000 to 1111");
+  for(i=4'b0000; i<=4'b1111; i=i+1)
+  begin
+       {b, a} = i;
+        #20;
+       $display ("Input A = %b----Input B = %b----Input C = %b----Output Sum = %b----Output Carry = %b",a,b,cin,s,c);
+  end
+  $display ("A various from 0000 to 1111 and B varies from 0000 to 1111");
+  for(i=4'b0000; i<=4'b1111; i=i+1)
+  begin
+       a = i;
+       b = i;
+       #20;
+       $display ("Input A = %b----Input B = %b----Input C = %b----Output Sum = %b----Output Carry = %b",a,b,cin,s,c);
+  end
+end
+
+endmodule
